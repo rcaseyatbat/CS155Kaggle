@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 # cross validation
 from sklearn import cross_validation
 
+from linRegClassifier import linRegClassifier
 
 # NOTE: Decrease if you want to do some cross validation. 
 # (just changed to 4000 to train the final model, after selected leaf
@@ -63,15 +64,16 @@ for n in n_estimators:
     print "Working on n... = ", n
     # initialize the tree model 
     clf = ensemble.AdaBoostClassifier(base_estimator = tree.DecisionTreeClassifier(max_depth=1), n_estimators = n)
+    #clf = ensemble.AdaBoostClassifier(base_estimator = linRegClassifier(), n_estimators = n, algorithm='SAMME', learning_rate=0.001)
     # train the model
 
     # DONT NEED THIS ATM
-    #clf = clf.fit(X_train, Y_train)
+    clf = clf.fit(X_train, Y_train)
 
     # make prediction
-    #G_train = clf.predict(X_train)
-    #G_test = clf.predict(X_test)
-    #G_testFile = clf.predict(X_testFile)
+    G_train = clf.predict(X_train)
+    G_test = clf.predict(X_test)
+    G_testFile = clf.predict(X_testFile)
     #print G_testFile
 
     # compute error 
